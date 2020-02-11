@@ -3,10 +3,21 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: true,
+      notEmpty: true
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -24,8 +35,9 @@ const User = db.define('user', {
       return () => this.getDataValue('salt')
     }
   },
-  googleId: {
-    type: Sequelize.STRING
+  cash: {
+    type: Sequelize.DOUBLE(25, 2),
+    defaultValue: 5000 // all users start with $5000 in their account
   }
 })
 
