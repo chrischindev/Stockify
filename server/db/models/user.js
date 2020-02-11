@@ -36,7 +36,7 @@ const User = db.define('user', {
     }
   },
   cash: {
-    type: Sequelize.DOUBLE(25, 2),
+    type: Sequelize.DECIMAL,
     defaultValue: 5000 // all users start with $5000 in their account
   }
 })
