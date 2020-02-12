@@ -18,6 +18,7 @@ async function seed() {
   ])
 
   const transactions = await Promise.all([
+    // User1's transactions:
     Transaction.create({
       userId: 1,
       symbol: 'AAPL',
@@ -59,6 +60,28 @@ async function seed() {
       price: 200,
       quantity: 10,
       total: 2000
+    }),
+    // User2's transactions:
+    Transaction.create({
+      userId: 2,
+      symbol: 'AAPL',
+      price: 300,
+      quantity: 2,
+      total: 600
+    }),
+    Transaction.create({
+      userId: 2,
+      symbol: 'GOOGL',
+      price: 100,
+      quantity: 10,
+      total: 1000
+    }),
+    Transaction.create({
+      userId: 2,
+      symbol: 'NFLX',
+      price: 300,
+      quantity: 30,
+      total: 9000
     })
   ])
 
