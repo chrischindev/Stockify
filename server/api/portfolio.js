@@ -3,6 +3,25 @@
 const router = require('express').Router()
 const {Transaction} = require('../db/models')
 const Sequelize = require('sequelize')
+const axios = require('axios')
+const {iexAPITestKey, iexAPITestPubKey} = require('../../secrets')
+
+/**
+ * function to retrieve quote information for multiple stocks
+ * @param {string[]} symbols
+ */
+async function getBulkQuote(symbols) {
+  symbols = symbols.join(',')
+  // const {data} = await axios.get(
+  //   `https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=${iexAPITestKey}`
+  // )
+
+  const {data} = await axios.get(
+    `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=quote&token=${iexAPITestKey}`
+  )
+
+  return data
+}
 
 // Middleware to check if user is logged in
 router.use((req, res, next) => {
@@ -17,7 +36,7 @@ router.use((req, res, next) => {
 // API route to serve up a user's portfolio
 router.get('/', async (req, res, next) => {
   try {
-    const portfolio = await Transaction.findAll({
+    let portfolio = await Transaction.findAll({
       where: {userId: req.user.id},
       attributes: [
         'symbol',
@@ -25,6 +44,19 @@ router.get('/', async (req, res, next) => {
       ],
       group: ['symbol']
     })
+
+    const symbols = portfolio.map(stock => stock.symbol)
+
+    const quotes = await getBulkQuote(symbols)
+    portfolio = portfolio.map(stock => {
+      const stockInfo = {}
+      stockInfo.symbol = stock.symbol
+      stockInfo.totalQty = stock.dataValues.totalQty
+      stockInfo.price = quotes[stock.symbol].quote.latestPrice
+      stockInfo.change = quotes[stock.symbol].quote.change
+      return stockInfo
+    })
+
     res.json(portfolio)
   } catch (error) {
     next(error)
