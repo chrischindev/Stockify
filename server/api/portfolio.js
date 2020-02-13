@@ -45,17 +45,18 @@ router.get('/', async (req, res, next) => {
       group: ['symbol']
     })
 
-    const symbols = portfolio.map(stock => stock.symbol)
-
-    const quotes = await getBulkQuote(symbols)
-    portfolio = portfolio.map(stock => {
-      const stockInfo = {}
-      stockInfo.symbol = stock.symbol
-      stockInfo.totalQty = stock.dataValues.totalQty
-      stockInfo.price = quotes[stock.symbol].quote.latestPrice
-      stockInfo.change = quotes[stock.symbol].quote.change
-      return stockInfo
-    })
+    if (portfolio.length) {
+      const symbols = portfolio.map(stock => stock.symbol)
+      const quotes = await getBulkQuote(symbols)
+      portfolio = portfolio.map(stock => {
+        const stockInfo = {}
+        stockInfo.symbol = stock.symbol
+        stockInfo.totalQty = stock.dataValues.totalQty
+        stockInfo.price = quotes[stock.symbol].quote.latestPrice
+        stockInfo.change = quotes[stock.symbol].quote.change
+        return stockInfo
+      })
+    }
 
     res.json(portfolio)
   } catch (error) {
