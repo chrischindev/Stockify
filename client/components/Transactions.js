@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getTransactions, addTransactionThunk} from '../store/transactions'
-import AutoCompleteText from './AutoCompleteText'
+// import TradeForm from './TradeForm'
+import AddTransaction from './AddTransaction'
 
 class Transactions extends Component {
   componentDidMount() {
@@ -15,32 +16,35 @@ class Transactions extends Component {
         {this.props.transactions.length === 0 ? (
           <div>No transactions to show.</div>
         ) : (
-          this.props.transactions.map(transaction => {
-            return (
-              <div key={transaction.id}>
-                <span className="date">
-                  {transaction.createdAt.slice(0, 10)}
-                </span>{' '}
-                {transaction.quantity > 0 ? (
-                  <span>BUY </span>
-                ) : (
-                  <span>SELL </span>
-                )}
-                <span className="symbol">{transaction.symbol}</span>{' '}
-                <span className="quantity">{transaction.quantity} Shares</span>{' '}
-                <span className="price">
-                  @ ${parseFloat(transaction.price).toFixed(2)}
-                </span>{' '}
-                <span className="value">
-                  ${parseFloat(transaction.total).toFixed(2)}
-                </span>{' '}
-              </div>
-            )
-          })
+          this.props.transactions
+            .sort((a, b) => b.id - a.id)
+            .map(transaction => {
+              return (
+                <div key={transaction.id}>
+                  <span className="date">
+                    {transaction.createdAt.slice(0, 10)}
+                  </span>{' '}
+                  {transaction.quantity > 0 ? (
+                    <span>BUY </span>
+                  ) : (
+                    <span>SELL </span>
+                  )}
+                  <span className="symbol">{transaction.symbol}</span>{' '}
+                  <span className="quantity">
+                    {transaction.quantity} Shares
+                  </span>{' '}
+                  <span className="price">
+                    @ ${parseFloat(transaction.price).toFixed(2)}
+                  </span>{' '}
+                  <span className="value">
+                    ${parseFloat(transaction.total).toFixed(2)}
+                  </span>{' '}
+                </div>
+              )
+            })
         )}
-        <div className="TradeComponent">
-          <AutoCompleteText />
-        </div>
+        {/* <TradeForm /> */}
+        <AddTransaction />
       </div>
     )
   }

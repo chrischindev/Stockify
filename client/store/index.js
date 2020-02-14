@@ -6,8 +6,9 @@ import user from './user'
 import portfolio from './portfolio'
 import transactions from './transactions'
 import symbols from './symbols'
+import cash from './cash'
 
-const reducer = combineReducers({user, portfolio, transactions, symbols})
+const reducer = combineReducers({user, portfolio, transactions, symbols, cash})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

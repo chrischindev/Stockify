@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getPortfolio} from '../store/portfolio'
-import AutoCompleteText from './AutoCompleteText'
+// import TradeForm from './TradeForm'
+import AddTransaction from './AddTransaction'
 
 class Portfolio extends Component {
   componentDidMount() {
@@ -37,9 +38,8 @@ class Portfolio extends Component {
             </div>
           )
         })}
-        <div className="TradeComponent">
-          <AutoCompleteText />
-        </div>
+        {/* <TradeForm /> */}
+        <AddTransaction />
       </div>
     )
   }

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSymbols} from '../store/symbols'
 
-class AutoCompleteText extends Component {
+class SymbolsInput extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -15,6 +15,7 @@ class AutoCompleteText extends Component {
     this.props.getSymbols()
   }
 
+  // function to update suggestions as user enters text in input
   onTextChanged = e => {
     let value = e.target.value
     let lastChar = value[value.length - 1]
@@ -28,6 +29,25 @@ class AutoCompleteText extends Component {
       suggestions = this.props.symbols.filter(symbol => regex.test(symbol))
     }
     this.setState(() => ({suggestions, text: value}))
+    this.props.handleChange(e)
+  }
+
+  // function to close suggestions list if user leaves input field
+  closeSuggestions = e => {
+    const value = e.target.value.toUpperCase()
+
+    this.setState(() => ({
+      text: value,
+      suggestions: []
+    }))
+    this.props.handleChange(e)
+  }
+
+  suggestionSelected(value) {
+    this.setState(() => ({
+      text: value,
+      suggestions: []
+    }))
   }
 
   renderSuggestions() {
@@ -38,7 +58,7 @@ class AutoCompleteText extends Component {
     return (
       <ul>
         {suggestions.map(item => (
-          <li key={item} onClick={() => this.suggestionSelected(item)}>
+          <li key={item} onMouseDown={() => this.suggestionSelected(item)}>
             {item}
           </li>
         ))}
@@ -46,22 +66,20 @@ class AutoCompleteText extends Component {
     )
   }
 
-  suggestionSelected(value) {
-    this.setState(() => ({
-      text: value,
-      suggestions: []
-    }))
-  }
-
   render() {
     const {text} = this.state
+
     return (
-      <div className="AutoCompleteText">
+      <div className="SymbolsInput">
         <input
+          name="symbol"
           value={text}
           onChange={this.onTextChanged}
           type="text"
           placeholder="Ticker"
+          className="symbolsInput"
+          onBlur={this.closeSuggestions}
+          required
         />
         {this.renderSuggestions()}
       </div>
@@ -81,4 +99,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AutoCompleteText)
+export default connect(mapStateToProps, mapDispatchToProps)(SymbolsInput)
