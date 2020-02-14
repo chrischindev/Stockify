@@ -5,8 +5,9 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import portfolio from './portfolio'
 import transactions from './transactions'
+import symbols from './symbols'
 
-const reducer = combineReducers({user, portfolio, transactions})
+const reducer = combineReducers({user, portfolio, transactions, symbols})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

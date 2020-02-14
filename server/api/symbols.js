@@ -10,7 +10,10 @@ router.get('/', async (req, res, next) => {
     let {data} = await axios.get(
       `https://sandbox.iexapis.com/stable/ref-data/iex/symbols?token=${iexAPITestKey}`
     )
-    data = data.map(stock => stock.symbol)
+    data = data
+      .filter(stock => stock.isEnabled)
+      .map(stock => stock.symbol)
+      .sort()
     res.send(data)
   } catch (error) {
     next(error)
