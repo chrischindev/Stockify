@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 
 const Cash = props => {
   return <div className="cash">Cash: ${props.cash.toFixed(2)}</div>

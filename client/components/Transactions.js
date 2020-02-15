@@ -29,7 +29,7 @@ class Transactions extends Component {
                   )}
                   <span className="symbol">{transaction.symbol}</span>{' '}
                   <span className="quantity">
-                    {transaction.quantity} Shares
+                    {parseInt(transaction.quantity, 10)} Shares
                   </span>{' '}
                   <span className="price">
                     @ ${parseFloat(transaction.price).toFixed(2)}

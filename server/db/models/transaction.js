@@ -10,9 +10,8 @@ const Transaction = db.define('transaction', {
     type: Sequelize.DECIMAL
   },
   quantity: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL,
     validate: {
-      isInt: true,
       min: 0
     }
   },

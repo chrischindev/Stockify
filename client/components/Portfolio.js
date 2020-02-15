@@ -26,7 +26,8 @@ class Portfolio extends Component {
           return (
             <div key={stock.symbol}>
               <span className="symbol">{stock.symbol}</span> -{' '}
-              <span className="totalQty">{stock.totalQty}</span> Shares{' '}
+              <span className="totalQty">{parseInt(stock.totalQty, 10)}</span>{' '}
+              Shares{' '}
               <span className="totalValue">
                 $
                 {(Math.round(100 * stock.price * stock.totalQty) / 100).toFixed(
