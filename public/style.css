@@ -12,30 +12,25 @@ a {
   text-decoration: none;
 }
 
-/* label {
-  display: block;
-} */
-
 nav a {
   display: inline-block;
   margin: 1em;
 }
 
-form div {
-  margin: 1em;
-  /* display: inline-block; */
+.cash {
+  text-align: center;
 }
 
 .TradeForm {
-  margin: 50px auto 0 auto;
-  width: 110px;
+  margin: 0 auto 0 auto;
+  width: 200px;
 }
 
 .SymbolsInput {
   width: 100%;
   border: 1px solid grey;
   box-shadow: 2px 2px;
-  margin: 0;
+  margin-bottom: 10px;
 }
 
 .SymbolsInput input {
@@ -44,6 +39,13 @@ form div {
   font-size: 14px;
   padding: 10px 5px;
   outline: none;
+}
+
+.tradeQuantity {
+  width: 100%;
+  border: 1px solid grey;
+  box-shadow: 2px 2px;
+  padding: 10px 5px;
 }
 
 .SymbolsInput ul {

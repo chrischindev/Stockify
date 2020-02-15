@@ -3,13 +3,13 @@ import TradeForm from './TradeForm'
 import {connect} from 'react-redux'
 import {addTransactionThunk} from '../store/transactions'
 import {getCash} from '../store/cash'
+import Cash from './Cash'
 
 class AddTransaction extends Component {
   constructor(props) {
     super(props)
     this.state = {
       symbol: '',
-      price: '',
       quantity: ''
     }
     this.handleChange = this.handleChange.bind(this)
@@ -18,7 +18,8 @@ class AddTransaction extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    let {symbol, price, quantity} = this.state
+    let {symbol, quantity} = this.state
+    let price = this.props.price
     this.props.addTransaction(symbol, price, quantity)
     this.props.getCash()
   }
@@ -41,7 +42,8 @@ class AddTransaction extends Component {
     console.log('this.state in render', this.state)
     return (
       <div>
-        <div>Cash: ${this.props.cash}</div>
+        {/* <div className="cash">Cash: ${this.props.cash.toFixed(2)}</div> */}
+        <Cash cash={this.props.cash} />
         <TradeForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
@@ -53,7 +55,8 @@ class AddTransaction extends Component {
 
 const mapStateToProps = state => {
   return {
-    cash: state.cash
+    cash: state.cash,
+    price: state.price
   }
 }
 

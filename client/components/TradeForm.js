@@ -5,7 +5,9 @@ import SymbolsInput from './SymbolsInput'
 const TradeForm = props => {
   return (
     <form className="TradeForm" onSubmit={props.handleSubmit}>
+      <label htmlFor="symbol">Ticker</label>
       <SymbolsInput handleChange={props.handleChange} />
+      <label htmlFor="quantity">Shares</label>
       <input
         name="quantity"
         type="number"
@@ -13,6 +15,7 @@ const TradeForm = props => {
         placeholder="Quantity"
         onChange={props.handleChange}
         required
+        className="tradeQuantity"
       />
       <button type="submit">BUY</button>
     </form>

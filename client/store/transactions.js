@@ -3,7 +3,7 @@ import {REMOVE_USER} from './user'
 
 // Action Type
 const GOT_TRANSACTIONS = 'GOT_TRANSACTIONS'
-const ADD_TRANSACTION = 'ADD_TRANSACTION'
+export const ADD_TRANSACTION = 'ADD_TRANSACTION'
 
 // Action Creator
 const gotTransactions = transactions => {

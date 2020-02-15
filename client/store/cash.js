@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {REMOVE_USER} from './user'
+import {ADD_TRANSACTION} from './transactions'
 
 // Action Type
 const GOT_CASH = 'GOT_CASH'
@@ -25,6 +26,8 @@ const cashReducer = (cash = 0, action) => {
       return action.cash
     case REMOVE_USER:
       return 0
+    case ADD_TRANSACTION:
+      return cash - action.transaction.total
     default:
       return cash
   }

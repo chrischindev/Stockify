@@ -14,6 +14,7 @@ router.use('/symbols', require('./symbols'))
 router.use('/transactions', require('./transactions'))
 router.use('/portfolio', require('./portfolio'))
 router.use('/cash', require('./cash'))
+router.use('/price', require('./price'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')

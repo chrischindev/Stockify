@@ -12,6 +12,7 @@ class Transactions extends Component {
   render() {
     return (
       <div>
+        <AddTransaction />
         <h3>Transactions</h3>
         {this.props.transactions.length === 0 ? (
           <div>No transactions to show.</div>
@@ -43,8 +44,6 @@ class Transactions extends Component {
               )
             })
         )}
-        {/* <TradeForm /> */}
-        <AddTransaction />
       </div>
     )
   }
