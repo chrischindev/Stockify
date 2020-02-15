@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getPortfolio} from '../store/portfolio'
-// import TradeForm from './TradeForm'
-import AddTransaction from './AddTransaction'
 
 class Portfolio extends Component {
   componentDidMount() {
@@ -38,8 +36,6 @@ class Portfolio extends Component {
             </div>
           )
         })}
-        {/* <TradeForm /> */}
-        <AddTransaction />
       </div>
     )
   }

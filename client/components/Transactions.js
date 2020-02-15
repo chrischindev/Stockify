@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getTransactions, addTransactionThunk} from '../store/transactions'
-// import TradeForm from './TradeForm'
-import AddTransaction from './AddTransaction'
 
 class Transactions extends Component {
   componentDidMount() {
@@ -12,7 +10,6 @@ class Transactions extends Component {
   render() {
     return (
       <div>
-        <AddTransaction />
         <h3>Transactions</h3>
         {this.props.transactions.length === 0 ? (
           <div>No transactions to show.</div>
