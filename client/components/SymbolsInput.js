@@ -74,7 +74,7 @@ class SymbolsInput extends Component {
     if (price && typeof price === 'number') {
       return <div>Market Price: ${price.toFixed(2)}</div>
     } else if (this.props.symbol && typeof price === 'string') {
-      return <div className="invalidSymbol">Please enter a valid symbol.</div>
+      return <div className="errorMessage">Please enter a valid symbol.</div>
     }
     return null
   }

@@ -22,7 +22,9 @@ const TradeForm = props => {
       <label htmlFor="quantity">Shares</label>
       <Quantity handleChange={props.handleChange} />
       <div>Total: ${total}</div>
-
+      {total > props.cash ? (
+        <div className="errorMessage">Insufficient funds.</div>
+      ) : null}
       <button type="submit">BUY</button>
     </form>
   )

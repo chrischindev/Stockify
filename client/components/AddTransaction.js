@@ -6,6 +6,7 @@ import {getCash} from '../store/cash'
 import Cash from './Cash'
 import {getSymbols} from '../store/symbols'
 import {gotPrice} from '../store/price'
+import {getPortfolio} from '../store/portfolio'
 
 class AddTransaction extends Component {
   constructor(props) {
@@ -20,19 +21,19 @@ class AddTransaction extends Component {
     this.suggestionSelected = this.suggestionSelected.bind(this)
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
     let {symbol, quantity} = this.state
     let price = this.props.price
-    if (this.props.symbols.includes(symbol.toUpperCase()) && this.props.price) {
-      this.props.addTransaction(symbol, price, quantity)
-      this.props.getCash()
+    if (
+      this.props.symbols.includes(symbol.toUpperCase()) &&
+      price &&
+      price * quantity < this.props.cash
+    ) {
+      await this.props.addTransaction(symbol, price, quantity)
+      await this.props.getCash()
+      await this.props.getPortfolio()
     }
-    // console.log('symbol in handlesubmit ==>', symbol)
-    // console.log(
-    //   'in symbols?? =>',
-    //   this.props.symbols.includes(symbol.toUpperCase())
-    // )
   }
 
   handleChange(event) {
@@ -48,7 +49,7 @@ class AddTransaction extends Component {
         const regex = new RegExp(`^${value}`, 'i')
         suggestions = this.props.symbols.filter(symbol => regex.test(symbol))
       }
-      //update suggestions list and symbol as user enters text
+      // update suggestions list and symbol as user enters text
       this.setState(() => ({suggestions, symbol: value}))
 
       // reset price as user is entering text
@@ -97,7 +98,8 @@ const mapStateToProps = state => {
   return {
     cash: state.cash,
     price: state.price,
-    symbols: state.symbols
+    symbols: state.symbols,
+    portfolio: state.portfolio
   }
 }
 
@@ -107,7 +109,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(addTransactionThunk(symbol, price, quantity)),
     getCash: () => dispatch(getCash()),
     getSymbols: () => dispatch(getSymbols()),
-    resetPrice: () => dispatch(gotPrice(0))
+    resetPrice: () => dispatch(gotPrice(0)),
+    getPortfolio: () => dispatch(getPortfolio())
   }
 }
 

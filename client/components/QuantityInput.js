@@ -17,7 +17,7 @@ class QuantityInput extends Component {
   renderError() {
     const quantity = parseFloat(this.state.quantity)
     if (quantity && !Number.isInteger(quantity)) {
-      return <div>Please enter a whole number.</div>
+      return <div className="errorMessage">Please enter a whole number.</div>
     } else {
       return null
     }
