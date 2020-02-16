@@ -76,8 +76,9 @@ class AddTransaction extends Component {
   render() {
     console.log('this.state in render', this.state)
     return (
-      <div>
+      <div id="rightSection">
         <Cash cash={this.props.cash} />
+        <div className="break" />
         <TradeForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}

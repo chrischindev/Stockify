@@ -14,14 +14,6 @@ class QuantityInput extends Component {
     this.props.handleChange(event)
   }
 
-  renderError() {
-    const quantity = parseFloat(this.state.quantity)
-    if (quantity && !Number.isInteger(quantity)) {
-      return <div className="errorMessage">Please enter a whole number.</div>
-    } else {
-      return null
-    }
-  }
   render() {
     const {quantity} = this.state
     return (
@@ -36,7 +28,6 @@ class QuantityInput extends Component {
           required
           className="tradeQuantity"
         />
-        {this.renderError()}
       </div>
     )
   }

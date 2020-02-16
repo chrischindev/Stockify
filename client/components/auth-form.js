@@ -11,26 +11,26 @@ const AuthForm = props => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
+      <form onSubmit={handleSubmit} name={name} className="authForm">
         {name === 'signup' && (
           <div>
             <label htmlFor="userName">
               <small>Name</small>
             </label>
-            <input name="userName" type="text" />
+            <input name="userName" type="text" required />
           </div>
         )}
         <div>
           <label htmlFor="email">
             <small>Email</small>
           </label>
-          <input name="email" type="text" />
+          <input name="email" type="email" required />
         </div>
         <div>
           <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name="password" type="password" />
+          <input name="password" type="password" required />
         </div>
         <div>
           <button type="submit">{displayName}</button>

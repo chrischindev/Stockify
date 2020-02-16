@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-        <div>
+        <div id="twoColumns">
           {this.props.isLoggedIn ? <AddTransaction /> : null}
           <Routes />
         </div>

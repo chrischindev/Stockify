@@ -40,8 +40,10 @@ class SymbolsInput extends Component {
 
     this.props.suggestionSelected(value)
     // Get latest price based on user's input
-    if (value) {
+    if (value && this.props.symbols.includes(value)) {
       this.props.getPrice(value)
+    } else if (value && !this.props.symbols.includes(value)) {
+      this.props.gotPrice('Invalid Symbol')
     } else {
       // reset price if user does not enter any symbols
       this.props.gotPrice(0)
@@ -68,39 +70,35 @@ class SymbolsInput extends Component {
     )
   }
 
-  renderPrice() {
-    const price = this.props.price
+  // renderPrice() {
+  //   const price = this.props.price
 
-    if (price && typeof price === 'number') {
-      return <div>Market Price: ${price.toFixed(2)}</div>
-    } else if (this.props.symbol && typeof price === 'string') {
-      return <div className="errorMessage">Please enter a valid symbol.</div>
-    }
-    return null
-  }
+  //   if (price && typeof price === 'number') {
+  //     return <div>Market Price: ${price.toFixed(2)}</div>
+  //   } else if (this.props.symbol && typeof price === 'string') {
+  //     return <div className="errorMessage">Please enter a valid symbol.</div>
+  //   }
+  //   return null
+  // }
 
   render() {
     // const {text} = this.state
 
     return (
-      <div>
-        <div className="SymbolsInput">
-          <input
-            name="symbol"
-            // value={text}
-            value={this.props.symbol}
-            // onChange={this.onTextChanged}
-            onChange={this.props.handleChange}
-            type="text"
-            placeholder="Ticker"
-            onBlur={this.closeSuggestions}
-            required
-            autoComplete="off"
-          />
-          {this.renderSuggestions()}
-        </div>
-
-        {this.renderPrice()}
+      <div className="SymbolsInput">
+        <input
+          name="symbol"
+          // value={text}
+          value={this.props.symbol}
+          // onChange={this.onTextChanged}
+          onChange={this.props.handleChange}
+          type="text"
+          placeholder="Symbol (e.g. AMZN)"
+          onBlur={this.closeSuggestions}
+          required
+          autoComplete="off"
+        />
+        {this.renderSuggestions()}
       </div>
     )
   }
