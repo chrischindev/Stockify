@@ -2,7 +2,7 @@
 
 _An innovative platform to trade stocks and manage your portfolio._
 
-Deployed Link: [link to StockTradr](http://stocktradrapp.herokuapp.com/)
+Deployed Link: [StockTradr](http://stocktradrapp.herokuapp.com/)
 
 ## StockTradr Features
 
