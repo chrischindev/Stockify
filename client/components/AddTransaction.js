@@ -74,7 +74,6 @@ class AddTransaction extends Component {
   }
 
   render() {
-    console.log('this.state in render', this.state)
     return (
       <div id="rightSection">
         <Cash cash={this.props.cash} />

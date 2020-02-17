@@ -136,7 +136,7 @@ h1 {
 }
 
 .changeSpan {
-  width: 80px;
+  width: 100px;
   text-align: right;
 }
 
@@ -366,4 +366,10 @@ div.authButton {
 .authForm div.errorMessage {
   margin-top: 10px;
   margin-bottom: 0;
+}
+
+@media only screen and (max-width: 854px) {
+  #rightSection {
+    position: static;
+  }
 }

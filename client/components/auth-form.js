@@ -13,7 +13,7 @@ const AuthForm = props => {
     <div id="authDiv">
       <h1>StockTradr</h1>
       <div id="motto">
-        An innovative solution to trade stocks and manage your portfolio.
+        An innovative platform to trade stocks and manage your portfolio.
       </div>
       <form onSubmit={handleSubmit} name={name} className="authForm">
         {name === 'signup' && (

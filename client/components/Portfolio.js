@@ -32,8 +32,8 @@ class Portfolio extends Component {
         <div id="portfolioHeader">
           <span className="symbolSpan">Symbol</span>
           <span className="sharesSpan">Shares</span>
-          <span className="changeSpan">Change</span>
-          <span className="totalSpan">Total</span>
+          <span className="changeSpan">Change($/share)</span>
+          <span className="totalSpan">Current Value</span>
         </div>
         {this.props.portfolio.length === 0 ? (
           <div>No stocks to show.</div>
