@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {REMOVE_USER} from './user'
 
 // Action Type
 const GOT_PRICE = 'GOT_PRICE'
@@ -26,6 +27,8 @@ const priceReducer = (price = 0, action) => {
   switch (action.type) {
     case GOT_PRICE:
       return action.price
+    case REMOVE_USER:
+      return 0
     default:
       return price
   }

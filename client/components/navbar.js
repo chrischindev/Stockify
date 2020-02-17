@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-// import AddTransaction from './AddTransaction'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>StockTradr</h1>
+  <div id="navBar">
+    <h1 id="logo">StockTradr</h1>
     <nav>
       {isLoggedIn ? (
         <div>

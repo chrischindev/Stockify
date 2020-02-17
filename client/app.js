@@ -26,5 +26,3 @@ const mapState = state => {
 }
 
 export default connect(mapState)(App)
-
-// export default App

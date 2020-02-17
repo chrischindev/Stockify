@@ -27,46 +27,63 @@ class Portfolio extends Component {
   }
   render() {
     return (
-      <div>
-        <h3>Portfolio</h3>
-        <h4>
-          Portfolio Total: ${this.calculateTotalPortfolio(this.props.portfolio)}
-        </h4>
-        {this.props.portfolio
-          // Sort Portfolio alphabetically
-          .sort((a, b) => {
-            if (a.symbol < b.symbol) {
-              return -1
-            } else if (a.symbol > b.symbol) {
-              return 1
-            }
-            return 0
-          })
-          // map through portfolio to render each stock in a div
-          .map(stock => {
-            return (
-              <div key={stock.symbol} className="stockRow">
-                <span
-                  className={'symbol ' + this.setStockClassName(stock.change)}
-                >
-                  {stock.symbol}
-                </span>{' '}
-                -{' '}
-                <span className="totalQty">{parseInt(stock.totalQty, 10)}</span>{' '}
-                Shares{' '}
-                <span
-                  className={
-                    'totalValue ' + this.setStockClassName(stock.change)
-                  }
-                >
-                  $
-                  {(
-                    Math.round(100 * stock.price * stock.totalQty) / 100
-                  ).toFixed(2)}
-                </span>
-              </div>
-            )
-          })}
+      <div id="portfolioDiv">
+        <h3>Portfolio ${this.calculateTotalPortfolio(this.props.portfolio)}</h3>
+        <div id="portfolioHeader">
+          <span className="symbolSpan">Symbol</span>
+          <span className="sharesSpan">Shares</span>
+          <span className="changeSpan">Change</span>
+          <span className="totalSpan">Total</span>
+        </div>
+        {this.props.portfolio.length === 0 ? (
+          <div>No stocks to show.</div>
+        ) : (
+          this.props.portfolio
+            // Sort Portfolio alphabetically
+            .sort((a, b) => {
+              if (a.symbol < b.symbol) {
+                return -1
+              } else if (a.symbol > b.symbol) {
+                return 1
+              }
+              return 0
+            })
+            // map through portfolio to render each stock in a div
+            .map(stock => {
+              return (
+                <div key={stock.symbol} className="portfolioRow">
+                  <span
+                    className={
+                      'symbolSpan ' + this.setStockClassName(stock.change)
+                    }
+                  >
+                    {stock.symbol}
+                  </span>
+                  <span className="sharesSpan">
+                    {parseInt(stock.totalQty, 10)}
+                  </span>
+                  <span
+                    className={
+                      'changeSpan ' + this.setStockClassName(stock.change)
+                    }
+                  >
+                    {stock.change < 0 ? '- ' : null}$
+                    {Math.abs(stock.change).toFixed(2)}
+                  </span>
+                  <span
+                    className={
+                      'totalSpan ' + this.setStockClassName(stock.change)
+                    }
+                  >
+                    $
+                    {(
+                      Math.round(100 * stock.price * stock.totalQty) / 100
+                    ).toFixed(2)}
+                  </span>
+                </div>
+              )
+            })
+        )}
       </div>
     )
   }

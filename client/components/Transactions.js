@@ -9,8 +9,16 @@ class Transactions extends Component {
 
   render() {
     return (
-      <div>
+      <div id="transactionsDiv">
         <h3>Transactions</h3>
+        <div id="transactionHeader">
+          <span className="dateSpan">Date</span>
+          <span className="typeSpan">Type</span>
+          <span className="symbolSpan">Symbol</span>
+          <span className="sharesSpan">Shares</span>
+          <span className="priceSpan">Price</span>
+          <span className="totalSpan">Total</span>
+        </div>
         {this.props.transactions.length === 0 ? (
           <div>No transactions to show.</div>
         ) : (
@@ -18,25 +26,25 @@ class Transactions extends Component {
             .sort((a, b) => b.id - a.id)
             .map(transaction => {
               return (
-                <div key={transaction.id}>
-                  <span className="date">
+                <div key={transaction.id} className="transactionRow">
+                  <span className="dateSpan">
                     {transaction.createdAt.slice(0, 10)}
-                  </span>{' '}
+                  </span>
                   {transaction.quantity > 0 ? (
-                    <span>BUY </span>
+                    <span className="typeSpan">BUY </span>
                   ) : (
-                    <span>SELL </span>
+                    <span className="typeSpan">SELL </span>
                   )}
-                  <span className="symbol">{transaction.symbol}</span>{' '}
-                  <span className="quantity">
-                    {parseInt(transaction.quantity, 10)} Shares
-                  </span>{' '}
-                  <span className="price">
-                    @ ${parseFloat(transaction.price).toFixed(2)}
-                  </span>{' '}
-                  <span className="value">
+                  <span className="symbolSpan">{transaction.symbol}</span>
+                  <span className="sharesSpan">
+                    {parseInt(transaction.quantity, 10)}
+                  </span>
+                  <span className="priceSpan">
+                    ${parseFloat(transaction.price).toFixed(2)}
+                  </span>
+                  <span className="totalSpan">
                     ${parseFloat(transaction.total).toFixed(2)}
-                  </span>{' '}
+                  </span>
                 </div>
               )
             })

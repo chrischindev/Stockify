@@ -12,10 +12,6 @@ const {iexAPITestKey, iexAPITestPubKey} = require('../../secrets')
  */
 async function getBulkQuote(symbols) {
   symbols = symbols.join(',')
-  // const {data} = await axios.get(
-  //   `https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=${iexAPITestKey}`
-  // )
-
   const {data} = await axios.get(
     `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=quote&token=${iexAPITestKey}`
   )

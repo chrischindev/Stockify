@@ -10,7 +10,11 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
+    <div id="authDiv">
+      <h1>StockTradr</h1>
+      <div id="motto">
+        An innovative solution to trade stocks and manage your portfolio.
+      </div>
       <form onSubmit={handleSubmit} name={name} className="authForm">
         {name === 'signup' && (
           <div>
@@ -34,7 +38,6 @@ const AuthForm = props => {
             <div className="errorMessage"> {error.response.data} </div>
           )}
       </form>
-      {/* <a href="/auth/google">{displayName} with Google</a> */}
     </div>
   )
 }
