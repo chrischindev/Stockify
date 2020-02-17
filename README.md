@@ -2,7 +2,9 @@
 
 _An innovative platform to trade stocks and manage your portfolio._
 
-StockTradr Features
+Deployed Link: [link to StockTradr](http://stocktradrapp.herokuapp.com/)
+
+## StockTradr Features
 
 * Purchase Stocks
   * Ticker Dropdown Autocomplete
@@ -38,3 +40,4 @@ StockTradr Features
 * Node.js
 * Express
 * IEX Cloud Api
+* Fullstack Academy's Boilerplate
