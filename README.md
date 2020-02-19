@@ -25,6 +25,7 @@ Deployed Link: [StockTradr](http://stocktradrapp.herokuapp.com/)
 
 ## Screenshots
 
+![Image of Login](/images/login.png)
 ![Image of Portfolio](/images/portfolio.png)
 ![Image of Transactions](/images/transactions.png)
 
