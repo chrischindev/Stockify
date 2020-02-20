@@ -19,7 +19,7 @@ Link: _coming soon!_
 
 * Current Cash Balance
 
-## Screenshots -->
+## Screenshots
 
 _coming soon_
 
