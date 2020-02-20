@@ -76,6 +76,7 @@ class AddTransaction extends Component {
   render() {
     return (
       <div id="rightSection">
+        <div id="transactionTopDiv" />
         <Cash cash={this.props.cash} />
         <div className="break" />
         <TradeForm

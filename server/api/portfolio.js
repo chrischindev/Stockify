@@ -4,8 +4,8 @@ const router = require('express').Router()
 const {Transaction} = require('../db/models')
 const Sequelize = require('sequelize')
 const axios = require('axios')
-// const {iexAPITestKey, iexAPITestPubKey, iexAPIKey} = require('../../secrets')
-const iexAPIKey = process.env.iexAPIKey
+const {iexAPITestKey} = require('../../secrets')
+// const iexAPIKey = process.env.iexAPIKey
 
 /**
  * function to retrieve quote information for multiple stocks
@@ -15,14 +15,14 @@ async function getBulkQuote(symbols) {
   symbols = symbols.join(',')
 
   // Test API call
-  // const {data} = await axios.get(
-  //   `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=quote&token=${iexAPITestKey}`
-  // )
+  const {data} = await axios.get(
+    `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=quote&token=${iexAPITestKey}`
+  )
 
   // Actual API call
-  const {data} = await axios.get(
-    `https://cloud.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=quote&token=${iexAPIKey}`
-  )
+  // const {data} = await axios.get(
+  //   `https://cloud.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=quote&token=${iexAPIKey}`
+  // )
 
   return data
 }

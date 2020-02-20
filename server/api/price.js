@@ -2,22 +2,22 @@
 
 const router = require('express').Router()
 const axios = require('axios')
-// const {iexAPITestKey, iexAPITestPubKey, iexAPIKey} = require('../../secrets')
-const iexAPIKey = process.env.iexAPIKey
+const {iexAPITestKey} = require('../../secrets')
+// const iexAPIKey = process.env.iexAPIKey
 
 // API route to retrieve the latest price for a symbol
 router.get('/:symbol', async (req, res, next) => {
   try {
     let symbol = req.params.symbol
     // Test API call
-    // let {data} = await axios.get(
-    //   `https://sandbox.iexapis.com/stable/stock/${symbol}/price?token=${iexAPITestKey}`
-    // )
+    const {data} = await axios.get(
+      `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbol}&types=quote&token=${iexAPITestKey}`
+    )
 
     // Actual API call
-    const {data} = await axios.get(
-      `https://cloud.iexapis.com/stable/stock/market/batch?symbols=${symbol}&types=quote&token=${iexAPIKey}`
-    )
+    // const {data} = await axios.get(
+    //   `https://cloud.iexapis.com/stable/stock/market/batch?symbols=${symbol}&types=quote&token=${iexAPIKey}`
+    // )
 
     res.json(data[symbol].quote.latestPrice)
   } catch (error) {

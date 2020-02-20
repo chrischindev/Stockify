@@ -4,6 +4,7 @@ import {Navbar} from './components'
 import Routes from './routes'
 import {connect} from 'react-redux'
 import AddTransaction from './components/AddTransaction'
+import MarketTabs from './components/MarketTabs'
 
 class App extends Component {
   render() {
@@ -11,7 +12,12 @@ class App extends Component {
       <div>
         <Navbar />
         <div id="twoColumns">
-          {this.props.isLoggedIn ? <AddTransaction /> : null}
+          {this.props.isLoggedIn ? (
+            <div className="right">
+              <MarketTabs />
+              <AddTransaction />
+            </div>
+          ) : null}
           <Routes />
         </div>
       </div>
