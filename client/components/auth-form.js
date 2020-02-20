@@ -11,7 +11,7 @@ const AuthForm = props => {
 
   return (
     <div id="authDiv">
-      <h1>StockTradr</h1>
+      <h1>Stockify</h1>
       <div id="motto">
         An innovative platform to trade stocks and manage your portfolio.
       </div>

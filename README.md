@@ -1,44 +1,32 @@
-# StockTradr
+# Stockify
 
 _An innovative platform to trade stocks and manage your portfolio._
 
-Deployed Link: [StockTradr](http://stocktradrapp.herokuapp.com/)
+This is an update and improvement over my original [StockTradr](http://stocktradrapp.herokuapp.com/) app.
+Link: _coming soon!_
 
-## StockTradr Features
+<!-- Deployed Link: [Stockify](http://stocktradrapp.herokuapp.com/) -->
 
-* Purchase Stocks
+## Stockify Features
+
+* Purchase and Sell Stocks
   * Ticker Dropdown Autocomplete
 * View All Transactions
-  * Date
-  * Type
-  * Symbol
-  * Shares
-  * Price
-  * Total
+  Transaction information includes: Date, Type, Symbol, Shares, Price, and Total
+
 * View Portfolio
-  * Total Portfolio Value
-  * Symbol
-  * Shares
-  * Change(\$/share)
-  * Current Value
+  Portfolio details include Total Value, Symbol, Shares, Change, and Current Value
+
 * Current Cash Balance
 
-## Screenshots
+## Screenshots -->
 
-![Image of Login](/images/login.png)
+_coming soon_
+
+<!-- ![Image of Login](/images/login.png)
 ![Image of Portfolio](/images/portfolio.png)
-![Image of Transactions](/images/transactions.png)
+![Image of Transactions](/images/transactions.png) -->
 
 ## Technologies
 
-* HTML
-* CSS
-* JavaScript
-* React
-* Redux
-* PostgreSQL
-* Sequelize
-* Node.js
-* Express
-* IEX Cloud Api
-* Fullstack Academy's Boilerplate
+HTML, CSS, JavaScript, React, Redux, PostgreSQL, Sequelize, Node.js, Express, IEX Cloud Api,
