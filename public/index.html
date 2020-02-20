@@ -7,11 +7,22 @@
   <title>StockTradr</title>
   <link rel="stylesheet" href="/style.css" />
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <script defer src="/bundle.js"></script>
 </head>
 
 <body>
   <div id="app"></div>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 600,
+      easing: "ease",
+      mirror: false,
+      disable: "mobile",
+      once: true
+    });
+  </script>
 </body>
 
 </html>

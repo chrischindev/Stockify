@@ -9,7 +9,7 @@ class Transactions extends Component {
 
   render() {
     return (
-      <div id="transactionsDiv">
+      <div id="transactionsDiv" data-aos="fade-right">
         <h3>Transactions</h3>
         <div id="transactionHeader">
           <span className="dateSpan">Date</span>

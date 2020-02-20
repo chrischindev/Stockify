@@ -18,7 +18,7 @@ const TradeForm = props => {
         </div>
       )
     } else if (props.symbol && typeof price === 'string') {
-      return <div className="errorMessage">Please enter a valid symbol.</div>
+      return <div className="errorMessage">{price}</div>
     }
     return null
   }
@@ -42,6 +42,8 @@ const TradeForm = props => {
           symbols={props.symbols}
           suggestions={props.suggestions}
           suggestionSelected={props.suggestionSelected}
+          portfolioSymbols={props.portfolioSymbols}
+          buyMode={props.buyMode}
         />
       </div>
 
@@ -59,12 +61,12 @@ const TradeForm = props => {
         <div id="totalInfo">
           <span>Total</span> <span id="totalValue">${total}</span>
         </div>
-        {total > props.cash ? (
+        {total > props.cash && props.buyMode ? (
           <div className="errorMessage">Insufficient funds.</div>
         ) : null}
       </div>
 
-      <button type="submit">BUY</button>
+      <button type="submit">{props.buyMode ? 'BUY' : 'SELL'}</button>
     </form>
   )
 }

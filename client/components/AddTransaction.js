@@ -19,17 +19,32 @@ class AddTransaction extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.suggestionSelected = this.suggestionSelected.bind(this)
+    this.isValidTransaction = this.isValidTransaction.bind(this)
+  }
+
+  // Function to determine if sale or purchase is valid based on current state and props: symbol, quantity, mode, price and cash
+  isValidTransaction() {
+    const {symbol, quantity} = this.state
+    const price = this.props.price
+    const buyMode = this.props.buyMode
+
+    const validPurchase =
+      buyMode &&
+      this.props.symbols.includes(symbol.toUpperCase()) &&
+      price &&
+      price * quantity < this.props.cash
+
+    const validSale =
+      !buyMode && this.props.portfolioSymbols.includes(symbol.toUpperCase())
+
+    return validPurchase || validSale
   }
 
   async handleSubmit(event) {
     event.preventDefault()
-    let {symbol, quantity} = this.state
-    let price = this.props.price
-    if (
-      this.props.symbols.includes(symbol.toUpperCase()) &&
-      price &&
-      price * quantity < this.props.cash
-    ) {
+    const {symbol, quantity} = this.state
+    const price = this.props.price
+    if (this.isValidTransaction()) {
       await this.props.addTransaction(symbol, price, quantity)
       await this.props.getCash()
       await this.props.getPortfolio()
@@ -47,7 +62,12 @@ class AddTransaction extends Component {
       let suggestions = []
       if (value.length > 0) {
         const regex = new RegExp(`^${value}`, 'i')
-        suggestions = this.props.symbols.filter(symbol => regex.test(symbol))
+
+        // If buying stock, the symbol suggestions list will come from a filtered version of all valid symbols.
+        //If selling stock, the symbol suggestions list will come from a filtered version of only stocks the user owns
+        suggestions = this.props[
+          this.props.buyMode ? 'symbols' : 'portfolioSymbols'
+        ].filter(symbol => regex.test(symbol))
       }
       // update suggestions list and symbol as user enters text
       this.setState(() => ({suggestions, symbol: value}))
@@ -68,14 +88,14 @@ class AddTransaction extends Component {
     }))
   }
 
-  componentDidMount() {
-    this.props.getCash()
-    this.props.getSymbols()
+  async componentDidMount() {
+    await this.props.getCash()
+    await this.props.getSymbols()
   }
 
   render() {
     return (
-      <div id="rightSection">
+      <div id="transactionForm">
         <div id="transactionTopDiv" />
         <Cash cash={this.props.cash} />
         <div className="break" />
@@ -89,6 +109,9 @@ class AddTransaction extends Component {
           symbols={this.props.symbols}
           suggestions={this.state.suggestions}
           suggestionSelected={this.suggestionSelected}
+          type={this.state.type}
+          buyMode={this.props.buyMode}
+          portfolioSymbols={this.props.portfolioSymbols}
         />
       </div>
     )
@@ -100,7 +123,10 @@ const mapStateToProps = state => {
     cash: state.cash,
     price: state.price,
     symbols: state.symbols,
-    portfolio: state.portfolio
+    portfolio: state.portfolio,
+    portfolioSymbols: state.portfolio
+      .filter(stock => stock.totalQty > 0)
+      .map(stock => stock.symbol)
   }
 }
 

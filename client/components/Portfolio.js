@@ -27,7 +27,7 @@ class Portfolio extends Component {
   }
   render() {
     return (
-      <div id="portfolioDiv">
+      <div id="portfolioDiv" data-aos="fade-right">
         <h3>Portfolio ${this.calculateTotalPortfolio(this.props.portfolio)}</h3>
         <div id="portfolioHeader">
           <span className="symbolSpan">Symbol</span>

@@ -19,7 +19,7 @@ body {
   align-items: center;
   width: 100%;
   background-color: #1c1c1d;
-  z-index: 1;
+  z-index: 1000;
 }
 
 #logo,
@@ -147,7 +147,7 @@ h1 {
   border-bottom: 1px solid black;
 }
 
-#rightSection {
+#transactionForm {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   box-shadow: 0px 0px 20px black;
@@ -371,7 +371,7 @@ div.authButton {
 }
 
 @media only screen and (max-width: 854px) {
-  #rightSection {
+  #transactionForm {
     position: static;
   }
 }
@@ -380,6 +380,8 @@ div.authButton {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: sticky;
+  top: 91px;
 }
 
 #marketTabs {
@@ -406,8 +408,7 @@ div.authButton {
   color: #f2eded;
 }
 
-#marketTabs div.openTab,
-#marketTabs div.openTab:hover {
+#marketTabs div.openTab {
   color: #88e68d;
   box-shadow: 0 20px 0 #1c1c1d, 0 0 20px black;
   position: relative;
@@ -416,7 +417,7 @@ div.authButton {
 
 #transactionTopDiv {
   width: 100%;
-  height: 20px;
+  height: 22px;
   position: relative;
   z-index: 3;
   background-color: #1c1c1d;
