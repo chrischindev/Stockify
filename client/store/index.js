@@ -8,6 +8,8 @@ import transactions from './transactions'
 import symbols from './symbols'
 import cash from './cash'
 import price from './price'
+import buyMode from './buyMode'
+import symbol from './symbol'
 
 const reducer = combineReducers({
   user,
@@ -15,7 +17,9 @@ const reducer = combineReducers({
   transactions,
   symbols,
   cash,
-  price
+  price,
+  buyMode,
+  symbol
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -24,3 +28,4 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
+export * from './symbol'

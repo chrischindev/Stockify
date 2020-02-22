@@ -1,6 +1,7 @@
 import React from 'react'
 import SymbolsInput from './SymbolsInput'
 import Quantity from './QuantityInput'
+// import Price from './Price'
 
 const TradeForm = props => {
   const total =
@@ -48,6 +49,12 @@ const TradeForm = props => {
       </div>
 
       {renderPrice()}
+      {/* <Price
+        buyMode={props.buyMode}
+        symbol={props.symbol}
+        symbols={props.symbols}
+        portfolioSymbols={props.portfolioSymbols}
+      /> */}
 
       <div id="qtyDiv">
         <label htmlFor="quantity">Shares</label>

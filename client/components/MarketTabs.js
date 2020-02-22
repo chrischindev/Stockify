@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+// import {connect} from 'react-redux'
+// import {gotPrice, getPrice} from '../store/price'
 
 class MarketTabs extends Component {
   render() {
@@ -32,3 +34,18 @@ class MarketTabs extends Component {
 }
 
 export default MarketTabs
+
+// const mapStateToProps = state => {
+//   return {
+//     price: state.price
+//   }
+// }
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     resetPrice: () => dispatch(gotPrice(0)),
+//     getPrice: symbol => dispatch(getPrice(symbol))
+//   }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(MarketTabs)

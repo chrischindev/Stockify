@@ -7,6 +7,7 @@ import Cash from './Cash'
 import {getSymbols} from '../store/symbols'
 import {gotPrice} from '../store/price'
 import {getPortfolio} from '../store/portfolio'
+import {gotSymbol, updateSymbol} from '../store'
 
 class AddTransaction extends Component {
   constructor(props) {
@@ -95,7 +96,10 @@ class AddTransaction extends Component {
 
   render() {
     return (
-      <div id="transactionForm">
+      <div
+        id="transactionForm"
+        className={this.props.buyMode ? 'buyMode' : 'sellMode'}
+      >
         <div id="transactionTopDiv" />
         <Cash cash={this.props.cash} />
         <div className="break" />

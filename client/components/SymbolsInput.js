@@ -10,26 +10,26 @@ class SymbolsInput extends Component {
 
     this.props.suggestionSelected(value)
 
-    const buyMode = this.props.buyMode
-    const symbols = this.props.symbols
-    const portfolioSymbols = this.props.portfolioSymbols
+    // const buyMode = this.props.buyMode
+    // const symbols = this.props.symbols
+    // const portfolioSymbols = this.props.portfolioSymbols
 
-    // symbolList will either be all symbols (when purchasing) or portfolioSymbols (when selling)
-    const symbolList = buyMode ? symbols : portfolioSymbols
+    // // symbolList will either be all symbols (when purchasing) or portfolioSymbols (when selling)
+    // const symbolList = buyMode ? symbols : portfolioSymbols
 
-    if (value) {
-      if (symbolList.includes(value)) {
-        // Get latest price based on user's input
-        this.props.getPrice(value)
-      } else if (!symbols.includes(value)) {
-        this.props.gotPrice('Please enter a valid symbol.')
-      } else if (!buyMode && !portfolioSymbols.includes(value)) {
-        this.props.gotPrice('You do not own this stock.')
-      }
-    } else {
-      // reset price if user does not enter any symbols
-      this.props.gotPrice(0)
-    }
+    // if (value) {
+    //   if (symbolList.includes(value)) {
+    //     // Get latest price based on user's input
+    //     this.props.getPrice(value)
+    //   } else if (!symbols.includes(value)) {
+    //     this.props.gotPrice('Please enter a valid symbol.')
+    //   } else if (!buyMode && !portfolioSymbols.includes(value)) {
+    //     this.props.gotPrice('You do not own this stock.')
+    //   }
+    // } else {
+    //   // reset price if user does not enter any symbols
+    //   this.props.gotPrice(0)
+    // }
   }
 
   renderSuggestions() {
