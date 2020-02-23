@@ -1,3 +1,5 @@
+import {REMOVE_USER} from './user'
+
 // Action Type
 const GOT_BUYMODE = 'GOT_BUYMODE'
 const CHANGE_BUYMODE = 'CHANGE_BUYMODE'
@@ -22,6 +24,8 @@ const buyModeReducer = (buyMode = true, action) => {
       return buyMode
     case CHANGE_BUYMODE:
       return !buyMode
+    case REMOVE_USER:
+      return true
     default:
       return buyMode
   }

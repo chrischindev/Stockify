@@ -26,9 +26,20 @@ export const getTransactions = () => async dispatch => {
   dispatch(gotTransactions(data))
 }
 
-export const addTransactionThunk = (symbol, price, quantity) => {
+export const addPurchase = (symbol, price, quantity) => {
   return async dispatch => {
-    const {data} = await axios.post('/api/transactions', {
+    const {data} = await axios.post('/api/transactions/purchase', {
+      symbol,
+      price,
+      quantity
+    })
+    dispatch(addTransaction(data))
+  }
+}
+
+export const addSale = (symbol, price, quantity) => {
+  return async dispatch => {
+    const {data} = await axios.post('/api/transactions/sale', {
       symbol,
       price,
       quantity

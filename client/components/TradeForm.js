@@ -24,6 +24,24 @@ const TradeForm = props => {
     return null
   }
 
+  function renderStockError() {
+    const buyMode = props.buyMode
+    const symbol = props.symbol
+    const portfolioSymbols = props.portfolioSymbols
+    const price = props.price
+    if (
+      symbol &&
+      price &&
+      typeof price !== 'string' &&
+      !buyMode &&
+      !portfolioSymbols.includes(symbol)
+    ) {
+      return <div className="errorMessage">You do not own this stock.</div>
+    } else {
+      return null
+    }
+  }
+
   function renderQtyError() {
     const quantity = parseFloat(props.quantity)
     if (quantity && !Number.isInteger(quantity)) {
@@ -48,12 +66,8 @@ const TradeForm = props => {
       </div>
 
       {renderPrice()}
-      {/* <Price
-        buyMode={props.buyMode}
-        symbol={props.symbol}
-        symbols={props.symbols}
-        portfolioSymbols={props.portfolioSymbols}
-      /> */}
+
+      {renderStockError()}
 
       <div id="qtyDiv">
         <label htmlFor="quantity">Shares</label>

@@ -1,34 +1,20 @@
 /* eslint-disable complexity */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getPrice, gotPrice} from '../store/price'
+import {getPrice, gotBuyMode} from '../store'
 
 class SymbolsInput extends Component {
   // function to close suggestions list and update state if user leaves input field
-  closeSuggestions = e => {
+  closeSuggestions = async e => {
     const value = e.target.value.toUpperCase()
-    this.props.suggestionSelected(value)
+    await this.props.suggestionSelected(value)
 
-    // const buyMode = this.props.buyMode
-    // const symbols = this.props.symbols
-    // const portfolioSymbols = this.props.portfolioSymbols
-
-    // // symbolList will either be all symbols (when purchasing) or portfolioSymbols (when selling)
-    // const symbolList = buyMode ? symbols : portfolioSymbols
-
-    // if (value) {
-    //   if (symbolList.includes(value)) {
-    //     // Get latest price based on user's input
-    //     this.props.getPrice(value)
-    //   } else if (!symbols.includes(value)) {
-    //     this.props.gotPrice('Please enter a valid symbol.')
-    //   } else if (!buyMode && !portfolioSymbols.includes(value)) {
-    //     this.props.gotPrice('You do not own this stock.')
-    //   }
-    // } else {
-    //   // reset price if user does not enter any symbols
-    //   this.props.gotPrice(0)
-    // }
+    this.props.getPrice(
+      this.props.buyMode,
+      this.props.symbol,
+      this.props.symbols,
+      this.props.portfolioSymbols
+    )
   }
 
   renderSuggestions() {
@@ -73,14 +59,20 @@ class SymbolsInput extends Component {
 const mapStateToProps = state => {
   return {
     price: state.price,
-    symbol: state.symbol
+    symbol: state.symbol,
+    buyMode: state.buyMode,
+    symbols: state.symbols,
+    portfolioSymbols: state.portfolio
+      .filter(stock => stock.totalQty > 0)
+      .map(stock => stock.symbol)
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPrice: symbol => dispatch(getPrice(symbol)),
-    gotPrice: price => dispatch(gotPrice(price))
+    gotBuyMode: () => dispatch(gotBuyMode()),
+    getPrice: (buyMode, symbol, symbols, portfolioSymbols) =>
+      dispatch(getPrice(buyMode, symbol, symbols, portfolioSymbols))
   }
 }
 

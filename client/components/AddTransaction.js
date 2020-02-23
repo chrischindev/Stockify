@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import TradeForm from './TradeForm'
 import {connect} from 'react-redux'
-import {addTransactionThunk} from '../store/transactions'
+// import {addTransactionThunk} from '../store/transactions'
 import {getCash} from '../store/cash'
 import Cash from './Cash'
 import {getSymbols} from '../store/symbols'
 import {gotPrice} from '../store/price'
 import {getPortfolio} from '../store/portfolio'
-import {gotSymbol, updateSymbol} from '../store'
+import {gotSymbol, updateSymbol, addPurchase, addSale} from '../store'
 
 class AddTransaction extends Component {
   constructor(props) {
@@ -25,7 +25,6 @@ class AddTransaction extends Component {
 
   // Function to determine if sale or purchase is valid based on current state and props: symbol, quantity, mode, price and cash
   isValidTransaction() {
-    // const {symbol, quantity} = this.state
     const symbol = this.props.symbol
     const {quantity} = this.state
     const price = this.props.price
@@ -38,17 +37,30 @@ class AddTransaction extends Component {
       price * quantity < this.props.cash
 
     const validSale =
-      !buyMode && this.props.portfolioSymbols.includes(symbol.toUpperCase())
+      !buyMode &&
+      this.props.portfolioSymbols.includes(symbol.toUpperCase()) &&
+      price &&
+      quantity <=
+        this.props.portfolio.filter(
+          stock => stock.symbol === symbol.toUpperCase()
+        )[0].totalQty
 
     return validPurchase || validSale
   }
 
   async handleSubmit(event) {
     event.preventDefault()
-    const {symbol, quantity} = this.state
+    const {quantity} = this.state
     const price = this.props.price
+    const symbol = this.props.symbol
+    const buyMode = this.props.buyMode
     if (this.isValidTransaction()) {
-      await this.props.addTransaction(symbol, price, quantity)
+      if (buyMode) {
+        await this.props.addPurchase(symbol, price, quantity)
+      } else {
+        await this.props.addSale(symbol, price, quantity)
+      }
+
       await this.props.getCash()
       await this.props.getPortfolio()
     }
@@ -141,13 +153,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addTransaction: (symbol, price, quantity) =>
-      dispatch(addTransactionThunk(symbol, price, quantity)),
+    // addTransaction: (symbol, price, quantity) =>
+    //   dispatch(addTransactionThunk(symbol, price, quantity)),
     getCash: () => dispatch(getCash()),
     getSymbols: () => dispatch(getSymbols()),
     resetPrice: () => dispatch(gotPrice(0)),
     getPortfolio: () => dispatch(getPortfolio()),
-    updateSymbol: symbol => dispatch(updateSymbol(symbol))
+    updateSymbol: symbol => dispatch(updateSymbol(symbol)),
+    addSale: (symbol, price, quantity) =>
+      dispatch(addSale(symbol, price, quantity)),
+    addPurchase: (symbol, price, quantity) =>
+      dispatch(addPurchase(symbol, price, quantity))
   }
 }
 

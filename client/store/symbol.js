@@ -1,3 +1,5 @@
+import {REMOVE_USER} from './user'
+
 // Action Type
 const GOT_SYMBOL = 'GOT_SYMBOL'
 const UPDATE_SYMBOL = 'UPDATE_SYMBOL'
@@ -23,6 +25,8 @@ const symbolReducer = (symbol = '', action) => {
       return symbol
     case UPDATE_SYMBOL:
       return action.symbol
+    case REMOVE_USER:
+      return ''
     default:
       return symbol
   }
