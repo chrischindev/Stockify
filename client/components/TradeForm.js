@@ -39,7 +39,6 @@ const TradeForm = props => {
         <label htmlFor="symbol">Ticker</label>
         <SymbolsInput
           handleChange={props.handleChange}
-          symbol={props.symbol}
           symbols={props.symbols}
           suggestions={props.suggestions}
           suggestionSelected={props.suggestionSelected}

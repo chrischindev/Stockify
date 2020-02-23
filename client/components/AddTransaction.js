@@ -13,7 +13,7 @@ class AddTransaction extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      symbol: '',
+      // symbol: '',
       quantity: '',
       suggestions: []
     }
@@ -25,7 +25,9 @@ class AddTransaction extends Component {
 
   // Function to determine if sale or purchase is valid based on current state and props: symbol, quantity, mode, price and cash
   isValidTransaction() {
-    const {symbol, quantity} = this.state
+    // const {symbol, quantity} = this.state
+    const symbol = this.props.symbol
+    const {quantity} = this.state
     const price = this.props.price
     const buyMode = this.props.buyMode
 
@@ -71,7 +73,9 @@ class AddTransaction extends Component {
         ].filter(symbol => regex.test(symbol))
       }
       // update suggestions list and symbol as user enters text
-      this.setState(() => ({suggestions, symbol: value}))
+      // this.setState(() => ({suggestions, symbol: value}))
+      this.setState(() => ({suggestions}))
+      this.props.updateSymbol(value)
 
       // reset price as user is entering text
       this.props.resetPrice()
@@ -83,8 +87,9 @@ class AddTransaction extends Component {
   }
 
   suggestionSelected(value) {
+    this.props.updateSymbol(value)
     this.setState(() => ({
-      symbol: value,
+      // symbol: value,
       suggestions: []
     }))
   }
@@ -109,11 +114,10 @@ class AddTransaction extends Component {
           price={this.props.price}
           quantity={this.state.quantity}
           cash={this.props.cash}
-          symbol={this.state.symbol}
+          symbol={this.props.symbol}
           symbols={this.props.symbols}
           suggestions={this.state.suggestions}
           suggestionSelected={this.suggestionSelected}
-          type={this.state.type}
           buyMode={this.props.buyMode}
           portfolioSymbols={this.props.portfolioSymbols}
         />
@@ -130,7 +134,8 @@ const mapStateToProps = state => {
     portfolio: state.portfolio,
     portfolioSymbols: state.portfolio
       .filter(stock => stock.totalQty > 0)
-      .map(stock => stock.symbol)
+      .map(stock => stock.symbol),
+    symbol: state.symbol
   }
 }
 
@@ -141,7 +146,8 @@ const mapDispatchToProps = dispatch => {
     getCash: () => dispatch(getCash()),
     getSymbols: () => dispatch(getSymbols()),
     resetPrice: () => dispatch(gotPrice(0)),
-    getPortfolio: () => dispatch(getPortfolio())
+    getPortfolio: () => dispatch(getPortfolio()),
+    updateSymbol: symbol => dispatch(updateSymbol(symbol))
   }
 }
 

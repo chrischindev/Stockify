@@ -7,7 +7,6 @@ class SymbolsInput extends Component {
   // function to close suggestions list and update state if user leaves input field
   closeSuggestions = e => {
     const value = e.target.value.toUpperCase()
-
     this.props.suggestionSelected(value)
 
     // const buyMode = this.props.buyMode
@@ -73,7 +72,8 @@ class SymbolsInput extends Component {
 
 const mapStateToProps = state => {
   return {
-    price: state.price
+    price: state.price,
+    symbol: state.symbol
   }
 }
 
