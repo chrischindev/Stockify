@@ -32,7 +32,8 @@ class Portfolio extends Component {
         <div id="portfolioHeader">
           <span className="symbolSpan">Symbol</span>
           <span className="sharesSpan">Shares</span>
-          <span className="changeSpan">Change($/share)</span>
+          <span className="changeSpan">Change($)</span>
+          <span className="changePercentSpan">Change(%)</span>
           <span className="totalSpan">Current Value</span>
         </div>
         {this.props.portfolio.length === 0 ? (
@@ -69,6 +70,15 @@ class Portfolio extends Component {
                   >
                     {stock.change < 0 ? '- ' : null}$
                     {Math.abs(stock.change).toFixed(2)}
+                  </span>
+                  <span
+                    className={
+                      'changePercentSpan ' +
+                      this.setStockClassName(stock.change)
+                    }
+                  >
+                    {(Math.round(100 * stock.changePercent) / 100).toFixed(2) +
+                      ' %'}
                   </span>
                   <span
                     className={

@@ -16,7 +16,7 @@ async function getBulkQuote(symbols) {
 
   // Test API call
   const {data} = await axios.get(
-    `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=quote&token=${iexAPITestKey}`
+    `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=quote&displayPercent=true&token=${iexAPITestKey}`
   )
 
   // Actual API call
@@ -48,6 +48,7 @@ router.get('/', async (req, res, next) => {
         stockInfo.totalQty = stock.dataValues.totalQty
         stockInfo.price = quotes[stock.symbol].quote.latestPrice
         stockInfo.change = quotes[stock.symbol].quote.change
+        stockInfo.changePercent = quotes[stock.symbol].quote.changePercent
         return stockInfo
       })
     }
