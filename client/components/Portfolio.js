@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getPortfolio} from '../store/portfolio'
+import upArrow from '../../images/up-arrow.svg'
+import downArrow from '../../images/down-arrow.svg'
 
 class Portfolio extends Component {
   componentDidMount() {
@@ -77,8 +79,17 @@ class Portfolio extends Component {
                       this.setStockClassName(stock.change)
                     }
                   >
-                    {(Math.round(100 * stock.changePercent) / 100).toFixed(2) +
-                      ' %'}
+                    {stock.changePercent < 0 ? '- ' : null}
+                    {(
+                      Math.round(100 * Math.abs(stock.changePercent)) / 100
+                    ).toFixed(2) + ' %'}{' '}
+                    {stock.change > 0 ? (
+                      <img className="upArrow" src={upArrow} />
+                    ) : stock.change < 0 ? (
+                      <img className="downArrow" src={downArrow} />
+                    ) : (
+                      <div className="nochangeDiv" />
+                    )}
                   </span>
                   <span
                     className={
